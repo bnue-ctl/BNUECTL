@@ -5,50 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[미래교육원] 이미지 플랫폼 사용 신청</title>
     <style>
-        /* (스타일 코드는 이전과 동일하므로 생략합니다. 기존 코드를 그대로 두시면 됩니다!.) */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         :root {
-            --primary-color: #005a9c;
-            --primary-color-light: #e6f0f9;
-            --success-color: #10B981;
-            --text-color: #334155;
-            --subtle-text-color: #94A3B8;
-            --bg-color: #F8FAFC;
-            --border-color: #E2E8F0;
-            --card-shadow: rgba(0, 90, 156, 0.1);
-            --border-radius-lg: 24px;
-            --border-radius-md: 14px;
+            --primary-color: #005a9c; --primary-color-light: #e6f0f9; --success-color: #10B981;
+            --text-color: #334155; --subtle-text-color: #94A3B8; --bg-color: #F8FAFC;
+            --border-color: #E2E8F0; --card-shadow: rgba(0, 90, 156, 0.1);
+            --border-radius-lg: 24px; --border-radius-md: 14px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Pretendard', -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Pretendard', -apple-system, sans-serif; background-color: var(--bg-color);
             background-image: radial-gradient(circle at 1% 1%, rgba(0, 90, 156, 0.1) 0%, transparent 30%), radial-gradient(circle at 95% 95%, rgba(200, 215, 255, 0.2) 0%, transparent 30%);
-            background-attachment: fixed;
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            background-attachment: fixed; color: var(--text-color); display: flex; justify-content: center;
+            align-items: center; min-height: 100vh; padding: 20px;
         }
         .app-container {
-            width: 100%; max-width: 520px;
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: var(--border-radius-lg);
-            box-shadow: 0 20px 50px var(--card-shadow);
-            overflow: hidden;
-            animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            width: 100%; max-width: 520px; background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--border-radius-lg); box-shadow: 0 20px 50px var(--card-shadow);
+            overflow: hidden; animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .app-header { padding: 40px 35px 25px 35px; text-align: center; }
         .header-logo-container {
-            width: 90px; height: 90px; margin: 0 auto 25px;
-            background-color: white; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); padding: 18px;
+            width: 90px; height: 90px; margin: 0 auto 25px; background-color: white; border-radius: 50%; display: flex;
+            justify-content: center; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05); padding: 18px;
         }
         .header-logo-container img { width: 100%; height: auto; object-fit: contain; }
         .app-header h1 { font-size: 1.5rem; font-weight: 700; color: #1E293B; margin-bottom: 12px; }
@@ -85,7 +66,7 @@
         }
         .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 90, 156, 0.2); }
         .submit-btn:disabled { background: #E2E8F0; color: #94A3B8; cursor: not-allowed; transform: none; box-shadow: none; }
-        #result-container { text-align: center; display: none; padding-top: 20px; animation: fadeIn 0.5s; }
+        #result-container { text-align: center; padding-top: 20px; animation: fadeIn 0.5s; }
         .success-icon { margin-bottom: 20px; }
         .success-icon svg { width: 72px; height: 72px; }
         .result-card { background: white; border-radius: 18px; padding: 15px; text-align: left; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); }
@@ -105,18 +86,12 @@
     <main class="app-container">
         <header class="app-header">
             <div class="header-logo-container">
-                <!-- 
-                    [수정됨] Google Drive 링크 대신 GitHub에 직접 올린 이미지 사용을 권장합니다.
-                    'logo.png' 라는 이름으로 이미지를 GitHub 저장소에 올리고, 아래와 같이 경로를 수정하세요.
-                    지금은 임시로 외부 이미지 링크를 넣어두었습니다.
-                -->
                 <img src="https://www.bnue.ac.kr/sites/bnue/images/common/logo.png" alt="부산교육대학교 심볼 마크">
             </div>
             <h1>이미지 플랫폼 사용 신청</h1>
             <p>부산교육대학교 구성원을 위한 클립아트코리아 신청서 작성 페이지입니다.</p>
         </header>
         <section class="app-content">
-            <!-- [수정됨] form 태그에 name 속성을 추가하고, 각 input에 name 속성을 명시했습니다. -->
             <form name="submit-to-google-sheet" id="applyForm">
                 <div class="form-group">
                     <label for="employeeId">교번 (직번)</label>
@@ -126,7 +101,7 @@
                     <label for="dept">소속</label>
                     <input type="text" id="dept" name="dept" placeholder="학과 또는 부서명을 입력하세요" required>
                 </div>
-                <div class.form-group">
+                <div class="form-group">
                     <label for="name">성명</label>
                     <input type="text" id="name" name="name" placeholder="성명을 입력하세요" required>
                 </div>
@@ -143,7 +118,7 @@
                         </ul>
                     </div>
                     <label class="checkbox-container">
-                        <input type="checkbox" id="agree" required>
+                        <input type="checkbox" id="agree" name="agree" required>
                         <div class="custom-check">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </div>
@@ -153,8 +128,7 @@
                 <button type="submit" class="submit-btn" id="submitBtn">신청하고 계정 확인하기</button>
             </form>
 
-            <div id="result-container">
-                <!-- (결과 화면 HTML은 이전과 동일) -->
+            <div id="result-container" style="display: none;">
                 <div class="success-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" fill="var(--primary-color-light)"/>
@@ -180,9 +154,10 @@
             </div>
         </section>
     </main>
-    <!-- [수정됨] 스크립트 로직을 new FormData를 사용하는 방식으로 변경하여 안정성을 높였습니다. -->
+
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxqXyabjYixu9TjL1fc4aLwFA9_tIXEVz83g3hKeC_jWoThdehTT0AIRynbvC0iQVHM/exec';
+        // 요청하신 새로운 URL로 교체 완료되었습니다.
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzRN16La4IwsnG5patlK0RkZYpurgbdjl3oKvo3hkEQvYpNOalxnURAW7wpm4T9iWWA/exec';
         const form = document.forms['submit-to-google-sheet'];
         const submitBtn = document.getElementById('submitBtn');
 
@@ -192,13 +167,18 @@
             submitBtn.textContent = '신청하는 중...';
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    document.getElementById('applyForm').style.display = 'none';
-                    document.getElementById('result-container').style.display = 'block';
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        document.getElementById('applyForm').style.display = 'none';
+                        document.getElementById('result-container').style.display = 'block';
+                    } else {
+                        throw new Error(data.message || '서버에서 알 수 없는 오류가 발생했습니다.');
+                    }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert("오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                    alert("오류가 발생했습니다: " + error.message + "\n잠시 후 다시 시도해 주세요.");
                     submitBtn.disabled = false;
                     submitBtn.textContent = '신청하고 계정 확인하기';
                 });
