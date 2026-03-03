@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[미래교육원] 이미지 플랫폼 사용 신청</title>
     <style>
+        /* (스타일 코드는 이전과 동일하므로 생략합니다. 기존 코드를 그대로 두시면 됩니다.) */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         :root {
             --primary-color: #005a9c;
@@ -104,19 +105,19 @@
     <main class="app-container">
         <header class="app-header">
             <div class="header-logo-container">
-                <img src="https://drive.google.com/uc?export=view&id=1p6tIwROX4hL15wIw2fcK5YvdrrFpxbsK" alt="부산교육대학교 심볼 마크">
+                <!-- 
+                    [수정됨] Google Drive 링크 대신 GitHub에 직접 올린 이미지 사용을 권장합니다.
+                    'logo.png' 라는 이름으로 이미지를 GitHub 저장소에 올리고, 아래와 같이 경로를 수정하세요.
+                    지금은 임시로 외부 이미지 링크를 넣어두었습니다.
+                -->
+                <img src="https://www.bnue.ac.kr/sites/bnue/images/common/logo.png" alt="부산교육대학교 심볼 마크">
             </div>
             <h1>이미지 플랫폼 사용 신청</h1>
             <p>부산교육대학교 구성원을 위한 클립아트코리아 신청서 작성 페이지입니다.</p>
         </header>
         <section class="app-content">
-            <!-- ★★★ 중요 ★★★
-                 아래 <form> 태그는 서버로 데이터를 보내는 중요한 부분입니다.
-                 각 input과 textarea 태그에 있는 'name' 속성은 Code.gs의 'data.이름' 과 일치해야 합니다.
-                 예) name="employeeId"는 Code.gs의 data.employeeId 와 연결됩니다.
-                 현재 코드는 문제가 없지만, 나중에 항목을 추가할 때 참고하세요.
-            -->
-            <form id="applyForm" name="google-sheet-form">
+            <!-- [수정됨] form 태그에 name 속성을 추가하고, 각 input에 name 속성을 명시했습니다. -->
+            <form name="submit-to-google-sheet" id="applyForm">
                 <div class="form-group">
                     <label for="employeeId">교번 (직번)</label>
                     <input type="text" id="employeeId" name="employeeId" placeholder="교번 또는 직번을 입력하세요" required>
@@ -125,7 +126,7 @@
                     <label for="dept">소속</label>
                     <input type="text" id="dept" name="dept" placeholder="학과 또는 부서명을 입력하세요" required>
                 </div>
-                <div class="form-group">
+                <div class.form-group">
                     <label for="name">성명</label>
                     <input type="text" id="name" name="name" placeholder="성명을 입력하세요" required>
                 </div>
@@ -153,6 +154,7 @@
             </form>
 
             <div id="result-container">
+                <!-- (결과 화면 HTML은 이전과 동일) -->
                 <div class="success-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" fill="var(--primary-color-light)"/>
@@ -178,47 +180,28 @@
             </div>
         </section>
     </main>
+    <!-- [수정됨] 스크립트 로직을 new FormData를 사용하는 방식으로 변경하여 안정성을 높였습니다. -->
     <script>
-        const form = document.getElementById('applyForm');
-        // ▼▼▼▼▼ 여기에 새로 배포한 Apps Script URL을 반드시 넣어주세요! ▼▼▼▼▼
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwk7-DjOQWefQv09cFwb_KA0bHL9YI3WfIblzVPCZYWw1QFsGUJLjSSlt07kSq8BOU0/exec';
+        const form = document.forms['submit-to-google-sheet'];
+        const submitBtn = document.getElementById('submitBtn');
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', e => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerText = '신청하는 중...';
+            submitBtn.disabled = true;
+            submitBtn.textContent = '신청하는 중...';
 
-            // form 안의 input 값들을 JSON 객체로 만듭니다.
-            const formData = {
-                employeeId: document.getElementById('employeeId').value,
-                dept: document.getElementById('dept').value,
-                name: document.getElementById('name').value,
-                purpose: document.getElementById('purpose').value,
-            };
-
-            // 데이터를 JSON 문자열 형태로 서버에 전송합니다.
-            fetch(scriptURL, {
-                method: 'POST',
-                // mode: 'no-cors'는 응답을 받지 않겠다는 의미입니다. 
-                // 그래서 서버에 오류가 나도 성공한 것처럼 보일 수 있습니다.
-                // 하지만 현재 구조에서는 이 방법이 가장 간단합니다.
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                // 성공적으로 전송되면 (서버의 실제 성공 여부와 관계없이) 결과 화면을 보여줍니다.
-                document.getElementById('applyForm').style.display = 'none';
-                document.getElementById('result-container').style.display = 'block';
-            })
-            .catch(error => {
-                // 네트워크 오류 등 전송 자체가 실패했을 때 실행됩니다.
-                console.error('Error!', error.message);
-                alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                btn.disabled = false;
-                btn.innerText = '신청하고 계정 확인하기';
-            });
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('applyForm').style.display = 'none';
+                    document.getElementById('result-container').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '신청하고 계정 확인하기';
+                });
         });
 
         function copyText(elementId, buttonElement) {
